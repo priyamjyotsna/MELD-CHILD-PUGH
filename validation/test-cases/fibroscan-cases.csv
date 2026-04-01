@@ -1,0 +1,21 @@
+case_id,liver_stiffness,cap_score,expected_fibrosis_stage,expected_steatosis_grade,source
+FS001,3.5,,F0,,normal stiffness no CAP
+FS002,6.2,250,F1,S1,mild fibrosis mild fat
+FS003,8.5,285,F2,S2,moderate fibrosis moderate fat
+FS004,12.5,310,F3,S3,advanced fibrosis severe fat
+FS005,18.0,220,F4,S0,cirrhosis no significant fat
+FS006,4.8,295,F0,S3,normal stiffness but fatty
+FS007,5.0,,F1,,exactly at F0/F1 boundary
+FS008,6.9,,F1,,just below F1/F2 boundary
+FS009,7.0,,F2,,at F1/F2 boundary
+FS010,9.5,,F3,,at F2/F3 boundary
+FS011,14.0,,F4,,at F3/F4 boundary
+FS012,75.0,,F4,,very high stiffness
+FS013,2.5,,F0,,very low stiffness
+FS014,3.0,200,F0,S0,all normal
+FS015,3.0,250,F0,S1,normal stiffness mild fat
+FS016,3.0,275,F0,S2,normal stiffness moderate fat
+FS017,3.0,310,F0,S3,normal stiffness severe fat
+FS018,3.0,238,F0,S1,CAP at S0/S1 boundary
+FS019,3.0,260,F0,S2,CAP at S1/S2 boundary
+FS020,3.0,290,F0,S3,CAP at S2/S3 boundary

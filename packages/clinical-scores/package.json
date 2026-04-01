@@ -1,0 +1,57 @@
+{
+  "name": "@livertracker/clinical-scores",
+  "version": "1.0.0",
+  "description": "Validated MELD, MELD-Na, MELD 3.0, and Child-Pugh liver disease severity scoring engine",
+  "author": {
+    "name": "Dr. Jyotsna Priyam",
+    "url": "https://livertracker.com"
+  },
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "CITATION.cff"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.4",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.3"
+  },
+  "keywords": [
+    "meld",
+    "meld-na",
+    "meld-3",
+    "child-pugh",
+    "liver-disease",
+    "hepatology",
+    "clinical-calculator",
+    "transplant",
+    "medical"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/livertracker/clinical-scores"
+  },
+  "homepage": "https://livertracker.com"
+}

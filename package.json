@@ -1,0 +1,20 @@
+{
+  "name": "livertracker-clinical-scores",
+  "private": true,
+  "version": "1.0.0",
+  "description": "LiverTracker monorepo — iOS app and clinical scoring npm package",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Dr. Jyotsna Priyam",
+    "url": "https://livertracker.com"
+  }
+}

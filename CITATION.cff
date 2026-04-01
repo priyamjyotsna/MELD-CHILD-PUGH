@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "LiverTracker Clinical Scores"
+abstract: >-
+  An open-source, validated implementation of MELD, MELD-Na, MELD 3.0,
+  and Child-Pugh liver disease severity scoring systems. Available as an
+  iOS application, npm package, REST API, Python package, MCP server,
+  and R package.
+authors:
+  - family-names: "Priyam"
+    given-names: "Jyotsna"
+    orcid: "https://orcid.org/XXXX-XXXX-XXXX-XXXX"
+license: MIT
+repository-code: "https://github.com/livertracker/clinical-scores"
+url: "https://livertracker.com"
+doi: "10.5281/zenodo.XXXXXXX"
+version: "1.0.0"
+date-released: "2026-XX-XX"
+keywords:
+  - meld-score
+  - child-pugh
+  - liver-disease
+  - hepatology
+  - clinical-calculator
+  - transplant
+  - meld-3
+  - open-source
+  - react-native
+  - medical
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Priyam"
+      given-names: "Jyotsna"
+  title: "LiverTracker MELD & Child-Pugh: An Open-Source, Validated Mobile Application for Liver Disease Severity Scoring"
+  journal: "JMIR mHealth and uHealth"
+  year: 2026
+  doi: "10.2196/XXXXX"

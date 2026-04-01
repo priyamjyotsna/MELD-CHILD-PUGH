@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "MELD Child Pugh & Easy Liver Tools",
+    "slug": "easy-liver-tools",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "livertracker",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0D2B6B"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.livertracker.easy-liver-tools",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSPrivacyAccessedAPITypes": [],
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": ""
+      }
+    }
+  }
+}

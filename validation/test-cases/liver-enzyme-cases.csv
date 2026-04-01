@@ -1,0 +1,26 @@
+case_id,alt,ast,ggt,alp,bilirubin,expected_overall_status,expected_pattern,expected_ast_alt_ratio,source
+LE001,32,28,45,85,0.8,normal,normal,,all normal baseline
+LE002,85,62,120,95,1.8,elevated,mixed,0.73,R=2.68 mixed pattern
+LE003,25,20,180,280,0.9,elevated,cholestatic,,ALP/GGT elevated ALT normal
+LE004,150,200,90,100,3.5,significantly_elevated,mixed,1.33,R=4.5 mixed pattern
+LE005,,,45,,0.5,normal,insufficient_data,,single enzyme only
+LE006,300,250,350,500,8.0,significantly_elevated,cholestatic,0.83,R=1.8 cholestatic
+LE007,,,,85,0.8,normal,insufficient_data,,bilirubin+ALP only
+LE008,41,,,,0.8,borderline,insufficient_data,,ALT just above ULN
+LE009,40,,,,0.5,normal,insufficient_data,,ALT exactly at ULN
+LE010,80,200,,,,significantly_elevated,insufficient_data,2.5,AST/ALT>2 alcoholic
+LE011,60,40,,,,borderline,insufficient_data,0.67,AST/ALT<1 NAFLD
+LE012,200,150,80,100,,significantly_elevated,hepatocellular,0.75,R>5 hepatocellular
+LE013,25,20,300,400,,elevated,cholestatic,,R<2 cholestatic
+LE014,100,120,200,300,5.5,significantly_elevated,mixed,1.20,R=2.5 mixed
+LE015,,,,,1.0,normal,insufficient_data,,bilirubin at ULN
+LE016,,,,,1.1,borderline,insufficient_data,,bilirubin borderline
+LE017,,,,,2.1,elevated,insufficient_data,,bilirubin elevated
+LE018,,,,,5.5,significantly_elevated,insufficient_data,,bilirubin sig elevated
+LE019,81,,,,,,elevated,insufficient_data,,ALT >2x ULN
+LE020,201,,,,,,significantly_elevated,insufficient_data,,ALT >5x ULN
+LE021,,36,,,,,borderline,insufficient_data,,AST just above ULN
+LE022,,176,,,,,significantly_elevated,insufficient_data,,AST >5x ULN
+LE023,,,51,,,,borderline,insufficient_data,,GGT borderline
+LE024,,,251,,,,significantly_elevated,insufficient_data,,GGT sig elevated
+LE025,,,,121,,,borderline,insufficient_data,,ALP borderline
