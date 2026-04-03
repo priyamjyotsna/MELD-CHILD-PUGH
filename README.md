@@ -113,7 +113,7 @@ npm run dev
 ```
 
 - Defaults to `http://127.0.0.1:8787/api/v1/health`
-- **Deploy:** connect the **whole repo** to Vercel and leave **Root Directory empty** (repository root). Config lives in [`vercel.json`](vercel.json); serverless entry is [`api/[[...path]].ts`](api/[[...path]].ts). Then attach **`meldapi.livertracker.com`** if you want.
+- **Deploy:** connect the **whole repo** to Vercel and leave **Root Directory empty** (repository root). Config lives in [`vercel.json`](vercel.json); serverless entry is [`api/[[...path]].ts`](api/[[...path]].ts); static landing page in [`public/`](public/). Do not set a custom **Output Directory** in the dashboard (it can break `/api` functions). Add **`meldapi.livertracker.com`** when ready.
 
 Details: [`apps/api/README.md`](apps/api/README.md).
 

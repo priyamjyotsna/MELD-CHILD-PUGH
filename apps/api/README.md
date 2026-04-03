@@ -13,20 +13,23 @@ Examples (after you attach a domain):
 
 ## Vercel note (monorepo root)
 
-The live deployment uses the **repository root** as the Vercel project root (leave **Root Directory** in the Vercel dashboard **empty**). That avoids dashboard errors like “`apps/api` does not exist.”
+Deploy from the **Git repository root** with **Root Directory** in Vercel **empty** (not `apps/api`).
 
-- Repo-root [`vercel.json`](../vercel.json) — `installCommand`, `buildCommand`, `outputDirectory: apps/api/public`
-- Repo-root [`api/[[...path]].ts`](../api/[[...path]].ts) — Vercel serverless entry (imports this package’s `src/app.ts`)
+- [`vercel.json`](../vercel.json) — `npm ci` + build `clinical-scores` only (**no `outputDirectory`** so `/api` serverless routes are not suppressed).
+- [`api/[[...path]].ts`](../api/[[...path]].ts) — serverless entry → `src/app.ts`.
+- [`public/index.html`](../public/index.html) — landing page at `/`.
 
-Your HTTP routes are still **`/api/v1/...`** (Hono `basePath`), not the filesystem folder name.
+HTTP routes remain **`/api/v1/...`**.
 
 ## Deploy on Vercel (monorepo)
 
+**Recommended:** repository root as project root.
+
 1. **Import** [MELD-CHILD-PUGH](https://github.com/priyamjyotsna/MELD-CHILD-PUGH).
-2. **Root Directory:** leave **blank** (`.` / repository root). **Do not** set `apps/api`.
-3. **Production branch:** `main`.  
-   Install/build are taken from root `vercel.json` (`npm ci` + build `clinical-scores`).
-4. **Add domain:** e.g. `meldapi.livertracker.com` → CNAME per Vercel.
+2. **Root Directory:** leave **blank** (repo root). Root [`vercel.json`](../vercel.json) + [`api/`](../api/) + [`public/`](../public/) apply.
+3. **Alternative:** set **Root Directory** to **`apps/api`** if you prefer (uses [`vercel.json`](vercel.json) in this folder + nested `api/`). Do **not** set `outputDirectory` to a custom path (it can drop serverless routes).
+4. **Production branch:** `main`.
+5. **Domain:** e.g. `meldapi.livertracker.com` → CNAME per Vercel.
 
 Use the Vercel-assigned URL first to verify, then attach the custom subdomain.
 
