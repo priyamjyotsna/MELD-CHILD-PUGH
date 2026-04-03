@@ -34,6 +34,19 @@ Open-source monorepo for **liver disease assessment**: validated calculators for
 
 Implementation details and references live in **FORMULAS.md** and in-code constants.
 
+### OSF registrations (per tool)
+
+Each clinical module has its own **[Open Science Framework](https://osf.io)** DOI for transparent, citable registration:
+
+| Tool | OSF DOI |
+|------|---------|
+| MELD (incl. MELD-Na, MELD 3.0) | [10.17605/OSF.IO/WAM6K](https://doi.org/10.17605/OSF.IO/WAM6K) |
+| Child-Pugh | [10.17605/OSF.IO/XJWA8](https://doi.org/10.17605/OSF.IO/XJWA8) |
+| FibroScan interpreter | [10.17605/OSF.IO/CSBWN](https://doi.org/10.17605/OSF.IO/CSBWN) |
+| Liver enzyme checker | [10.17605/OSF.IO/3XEWC](https://doi.org/10.17605/OSF.IO/3XEWC) |
+
+These are also listed in [`CITATION.cff`](CITATION.cff) under `references` and in the npm package as `OSF_LIVERTRACKER_TOOL_REGISTRATIONS`.
+
 ---
 
 ## Quick start
@@ -112,6 +125,7 @@ This repo is the **reference implementation** for calculators also promoted unde
 
 ## Discovery & reproducibility (for papers and grants)
 
+- **OSF / per-tool DOI:** When you publish about *one* tool (e.g. only MELD), cite the **matching OSF DOI** in the table above in addition to this repo. See [`docs/CITATION.md`](docs/CITATION.md).
 - **GitHub citation:** The repo root [`CITATION.cff`](CITATION.cff) powers GitHub’s **“Cite this repository”** sidebar entry (standard APA/BibTeX export).
 - **Version pinning:** In methods sections, record a **release tag** or **commit SHA** and the app **build** (see `apps/mobile/app.json` `version` / iOS `buildNumber`).
 - **Archival DOI:** When you publish, create a **GitHub Release** and connect the repo to **[Zenodo](https://zenodo.org)** so each release gets a citable DOI; then add that DOI to `CITATION.cff` (step-by-step in [`docs/CITATION.md`](docs/CITATION.md)).

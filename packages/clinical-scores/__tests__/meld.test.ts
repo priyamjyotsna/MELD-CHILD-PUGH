@@ -59,6 +59,7 @@ describe('calculateMeld', () => {
   test('M011 — returns citation info', () => {
     const result = calculateMeld({ bilirubin: 1.2, creatinine: 1.0, inr: 1.1, onDialysis: false });
     expect(result.citationInfo.package).toBe('@livertracker/clinical-scores');
+    expect(result.citationInfo.osfRegistration?.doi).toBe('10.17605/OSF.IO/WAM6K');
   });
 
   test('M012 — components sum contributions to ~1', () => {

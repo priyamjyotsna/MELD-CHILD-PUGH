@@ -12,7 +12,7 @@ import {
   STEATOSIS_CUTOFFS,
   STEATOSIS_COLORS,
   FIBROSCAN_REFERENCES,
-  CITATION_INFO,
+  CITATION_INFO_FIBROSCAN,
 } from './constants';
 
 function getFibrosisStage(kpa: number) {
@@ -118,6 +118,6 @@ export function interpretFibroScan(input: FibroScanInput): FibroScanResult {
     recommendations,
     references: FIBROSCAN_REFERENCES,
     calculatedAt: new Date().toISOString(),
-    citationInfo: CITATION_INFO,
+    citationInfo: CITATION_INFO_FIBROSCAN,
   };
 }

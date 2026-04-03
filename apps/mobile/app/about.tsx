@@ -9,6 +9,7 @@ import {
   Linking,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { OSF_LIVERTRACKER_TOOL_REGISTRATIONS, GITHUB_REPOSITORY_URL } from '@livertracker/clinical-scores';
 import { Colors } from '../constants/colors';
 import { Typography } from '../constants/typography';
 import { Shadow, Spacing } from '../constants/spacing';
@@ -180,6 +181,38 @@ export default function AboutScreen() {
           />
         </CollapsibleSection>
 
+        {/* OSF registrations (citable DOIs per tool) */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>OSF registrations (cite per tool)</Text>
+          <Text style={styles.body}>
+            Each clinical module has an Open Science Framework DOI for research citations.
+          </Text>
+          {OSF_LIVERTRACKER_TOOL_REGISTRATIONS.map((reg) => (
+            <TouchableOpacity
+              key={reg.tool}
+              onPress={() => openDoi(reg.doi)}
+              accessibilityRole="link"
+              accessibilityLabel={`${reg.title} DOI ${reg.doi}`}
+            >
+              <Text style={styles.reference}>
+                <Text style={styles.bold}>
+                  {reg.tool === 'meld'
+                    ? 'MELD family'
+                    : reg.tool === 'child_pugh'
+                      ? 'Child-Pugh'
+                      : reg.tool === 'liver_enzymes'
+                        ? 'Liver enzymes'
+                        : 'FibroScan'}
+                  :{' '}
+                </Text>
+                {reg.title}
+                {'\n'}
+                <Text style={styles.doiLink}>https://doi.org/{reg.doi}</Text>
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
         {/* References */}
         <View style={styles.card}>
           <Text style={styles.cardTitle}>References</Text>
@@ -209,7 +242,7 @@ export default function AboutScreen() {
             This tool is open-source (MIT license) and available on GitHub. If you use this
             software in your research, please cite it.
           </Text>
-          <TouchableOpacity onPress={() => openUrl('https://github.com/livertracker/clinical-scores')}>
+          <TouchableOpacity onPress={() => openUrl(GITHUB_REPOSITORY_URL)}>
             <Text style={styles.link}>View on GitHub →</Text>
           </TouchableOpacity>
         </View>

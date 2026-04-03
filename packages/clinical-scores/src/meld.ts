@@ -2,7 +2,7 @@ import type { MeldInput, MeldResult, ComponentContribution } from './types';
 import {
   MELD_INTERPRETATIONS,
   MELD_REFERENCES,
-  CITATION_INFO,
+  CITATION_INFO_MELD_FAMILY,
   NORMAL_RANGES,
 } from './constants';
 
@@ -125,7 +125,7 @@ export function calculateMeld(input: MeldInput): MeldResult {
     references: MELD_REFERENCES,
     formula: 'MELD',
     calculatedAt: new Date().toISOString(),
-    citationInfo: CITATION_INFO,
+    citationInfo: CITATION_INFO_MELD_FAMILY,
   };
 }
 

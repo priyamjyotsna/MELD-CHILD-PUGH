@@ -2,7 +2,7 @@ import type { ChildPughInput, ChildPughResult, ComponentContribution } from './t
 import {
   CHILD_PUGH_CLASSIFICATIONS,
   CHILD_PUGH_REFERENCES,
-  CITATION_INFO,
+  CITATION_INFO_CHILD_PUGH,
   NORMAL_RANGES,
 } from './constants';
 
@@ -134,6 +134,6 @@ export function calculateChildPugh(input: ChildPughInput): ChildPughResult {
     },
     references: CHILD_PUGH_REFERENCES,
     calculatedAt: new Date().toISOString(),
-    citationInfo: CITATION_INFO,
+    citationInfo: CITATION_INFO_CHILD_PUGH,
   };
 }

@@ -2,7 +2,7 @@ import type { MeldNaInput, MeldResult, ComponentContribution } from './types';
 import {
   MELD_INTERPRETATIONS,
   MELD_NA_REFERENCES,
-  CITATION_INFO,
+  CITATION_INFO_MELD_FAMILY,
   NORMAL_RANGES,
 } from './constants';
 import { calculateMeld, getBilirubinStatus, getCreatinineStatus, getInrStatus } from './meld';
@@ -133,6 +133,6 @@ export function calculateMeldNa(input: MeldNaInput): MeldResult {
     references: MELD_NA_REFERENCES,
     formula: 'MELD-Na',
     calculatedAt: new Date().toISOString(),
-    citationInfo: CITATION_INFO,
+    citationInfo: CITATION_INFO_MELD_FAMILY,
   };
 }

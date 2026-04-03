@@ -1,8 +1,9 @@
 cff-version: 1.2.0
 message: >-
   If you use this software or validation data in research, teaching, or
-  clinical-quality work, please cite the repository (see also GitHub’s
-  “Cite this repository” for APA/BibTeX from this file).
+  clinical-quality work, please cite the GitHub repository and—when reporting
+  results from a specific tool—the matching OSF registration DOI under
+  references (MELD family, Child-Pugh, liver enzymes, or FibroScan interpreter).
 type: software
 title: "MELD-CHILD-PUGH: Liver clinical scores (MELD family, Child-Pugh, enzymes, FibroScan)"
 abstract: >-
@@ -40,3 +41,16 @@ keywords:
   - react-native
   - expo
   - medical-informatics
+references:
+  - type: software
+    title: "MELD Score Calculator — LiverTracker Clinical Tool (MELD, MELD-Na, MELD 3.0)"
+    doi: "10.17605/OSF.IO/WAM6K"
+  - type: software
+    title: "Child-Pugh Score Calculator — LiverTracker Clinical Tool"
+    doi: "10.17605/OSF.IO/XJWA8"
+  - type: software
+    title: "FibroScan Score Interpreter — LiverTracker Clinical Tool (Liver Stiffness & CAP Score)"
+    doi: "10.17605/OSF.IO/CSBWN"
+  - type: software
+    title: "Liver Enzyme Checker — LiverTracker Clinical Tool (ALT, AST, GGT, ALP, Bilirubin)"
+    doi: "10.17605/OSF.IO/3XEWC"

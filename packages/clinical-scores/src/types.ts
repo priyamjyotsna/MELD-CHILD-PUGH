@@ -59,9 +59,15 @@ export interface ScoringReference {
 }
 
 export interface CitationInfo {
-  package: string;           // "@livertracker/clinical-scores"
+  package: string; // "@livertracker/clinical-scores"
   version: string;
-  doi: string;               // Zenodo DOI
+  /** Monorepo / package archive DOI (e.g. Zenodo) when published */
+  doi: string;
+  /** OSF preregistration for this clinical module (LiverTracker), when applicable */
+  osfRegistration?: {
+    title: string;
+    doi: string;
+  };
   suggestedCitation: string;
 }
 

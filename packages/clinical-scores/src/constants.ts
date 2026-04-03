@@ -3,14 +3,65 @@ import type { ScoringReference, CitationInfo } from './types';
 export const PACKAGE_VERSION = '1.0.0';
 export const PACKAGE_NAME = '@livertracker/clinical-scores';
 export const ZENODO_DOI = '10.5281/zenodo.XXXXXXX';
+export const GITHUB_REPOSITORY_URL = 'https://github.com/priyamjyotsna/MELD-CHILD-PUGH';
 
-export const CITATION_INFO: CitationInfo = {
-  package: PACKAGE_NAME,
-  version: PACKAGE_VERSION,
-  doi: ZENODO_DOI,
-  suggestedCitation:
-    'Priyam J. LiverTracker Clinical Scores (v1.0.0). 2026. DOI: 10.5281/zenodo.XXXXXXX. Available at: https://livertracker.com',
-};
+/** OSF DOIs — one LiverTracker registration per clinical module */
+export const OSF_LIVERTRACKER_TOOL_REGISTRATIONS = [
+  {
+    tool: 'meld' as const,
+    title:
+      'MELD Score Calculator — LiverTracker Clinical Tool (MELD, MELD-Na, MELD 3.0)',
+    doi: '10.17605/OSF.IO/WAM6K',
+  },
+  {
+    tool: 'child_pugh' as const,
+    title: 'Child-Pugh Score Calculator — LiverTracker Clinical Tool',
+    doi: '10.17605/OSF.IO/XJWA8',
+  },
+  {
+    tool: 'fibroscan' as const,
+    title:
+      'FibroScan Score Interpreter — LiverTracker Clinical Tool (Liver Stiffness & CAP Score)',
+    doi: '10.17605/OSF.IO/CSBWN',
+  },
+  {
+    tool: 'liver_enzymes' as const,
+    title:
+      'Liver Enzyme Checker — LiverTracker Clinical Tool (ALT, AST, GGT, ALP, Bilirubin)',
+    doi: '10.17605/OSF.IO/3XEWC',
+  },
+] as const;
+
+function citationInfoForOsf(reg: (typeof OSF_LIVERTRACKER_TOOL_REGISTRATIONS)[number]): CitationInfo {
+  const doiUrl = `https://doi.org/${reg.doi}`;
+  return {
+    package: PACKAGE_NAME,
+    version: PACKAGE_VERSION,
+    doi: ZENODO_DOI,
+    osfRegistration: { title: reg.title, doi: reg.doi },
+    suggestedCitation: `Priyam J. ${reg.title} (v${PACKAGE_VERSION}). ${doiUrl}. Monorepo: ${GITHUB_REPOSITORY_URL}`,
+  };
+}
+
+/** MELD, MELD-Na, MELD 3.0 */
+export const CITATION_INFO_MELD_FAMILY = citationInfoForOsf(
+  OSF_LIVERTRACKER_TOOL_REGISTRATIONS[0],
+);
+/** Child-Pugh */
+export const CITATION_INFO_CHILD_PUGH = citationInfoForOsf(
+  OSF_LIVERTRACKER_TOOL_REGISTRATIONS[1],
+);
+/** FibroScan interpreter */
+export const CITATION_INFO_FIBROSCAN = citationInfoForOsf(
+  OSF_LIVERTRACKER_TOOL_REGISTRATIONS[2],
+);
+/** Liver enzyme checker */
+export const CITATION_INFO_LIVER_ENZYMES = citationInfoForOsf(
+  OSF_LIVERTRACKER_TOOL_REGISTRATIONS[3],
+);
+
+/** @deprecated Use module-specific CITATION_INFO_*; kept for imports that expect a generic object */
+export const CITATION_INFO: CitationInfo = CITATION_INFO_MELD_FAMILY;
 
 // ---- Severity Colors (from design system) ----
 export const COLORS = {

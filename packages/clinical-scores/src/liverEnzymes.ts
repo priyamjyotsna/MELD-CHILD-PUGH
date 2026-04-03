@@ -10,7 +10,7 @@ import {
   ENZYME_COLORS,
   ENZYME_STATUS_LABELS,
   LIVER_ENZYME_REFERENCES,
-  CITATION_INFO,
+  CITATION_INFO_LIVER_ENZYMES,
 } from './constants';
 
 function getEnzymeStatus(value: number, uln: number, isBilirubin: boolean): EnzymeStatus {
@@ -262,6 +262,6 @@ export function checkLiverEnzymes(input: LiverEnzymeInput): LiverEnzymeResult {
     recommendations,
     references: LIVER_ENZYME_REFERENCES,
     calculatedAt: new Date().toISOString(),
-    citationInfo: CITATION_INFO,
+    citationInfo: CITATION_INFO_LIVER_ENZYMES,
   };
 }

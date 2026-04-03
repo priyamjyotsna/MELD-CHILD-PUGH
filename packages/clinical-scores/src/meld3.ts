@@ -2,7 +2,7 @@ import type { Meld3Input, MeldResult, ComponentContribution } from './types';
 import {
   MELD_INTERPRETATIONS,
   MELD3_REFERENCES,
-  CITATION_INFO,
+  CITATION_INFO_MELD_FAMILY,
   NORMAL_RANGES,
 } from './constants';
 import { getBilirubinStatus, getCreatinineStatus, getInrStatus } from './meld';
@@ -189,6 +189,6 @@ export function calculateMeld3(input: Meld3Input): MeldResult {
     references: MELD3_REFERENCES,
     formula: 'MELD 3.0',
     calculatedAt: new Date().toISOString(),
-    citationInfo: CITATION_INFO,
+    citationInfo: CITATION_INFO_MELD_FAMILY,
   };
 }
