@@ -1,164 +1,143 @@
-# LiverTracker Clinical Scores
+# MELD · Child-Pugh · Liver clinical tools
 
-> Open-source, validated MELD, MELD-Na, MELD 3.0, and Child-Pugh liver disease severity scoring.
-> iOS app · npm package · REST API · Python/R libraries · MCP server.
+**Repository:** [github.com/priyamjyotsna/MELD-CHILD-PUGH](https://github.com/priyamjyotsna/MELD-CHILD-PUGH)
 
----
+Open-source monorepo for **liver disease assessment**: validated calculators for transplant severity scoring (MELD family, Child-Pugh), rule-based **liver enzyme** interpretation (including injury pattern and De Ritis–style ratios), and **FibroScan**-style staging from liver stiffness and CAP (steatosis). The same logic ships in a TypeScript **npm package** and an **iOS** app built with **Expo** (store-facing name: **MELD family scores**).
 
-## How to Cite
-
-If you use this software in your research, please cite it as:
-
-**BibTeX:**
-```bibtex
-@software{livertracker2026,
-  author    = {Priyam, Jyotsna},
-  title     = {LiverTracker Clinical Scores},
-  year      = {2026},
-  doi       = {10.5281/zenodo.XXXXXXX},
-  url       = {https://livertracker.com},
-  license   = {MIT}
-}
-```
-
-**APA:**
-> Priyam, J. (2026). *LiverTracker Clinical Scores* (v1.0.0). DOI: 10.5281/zenodo.XXXXXXX
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-
-See [CITATION.cff](CITATION.cff) for the full citation metadata.
+> **Disclaimer.** This software is for education and clinical decision support only. It does not replace professional judgment, laboratory validation, or institutional protocols. Not a medical device classification statement—see the in-app disclaimer.
 
 ---
 
-## Scoring Systems
+## What’s in this repo
 
-| Score | Description | Reference |
-|-------|-------------|-----------|
-| **MELD** | Model for End-Stage Liver Disease — 3-month mortality prediction | Kamath et al., Hepatology 2001 |
-| **MELD-Na** | MELD + serum sodium — improved accuracy in hyponatremia | Kim et al., NEJM 2008 |
-| **MELD 3.0** | Current OPTN standard (2023+) — adds albumin and sex | Kim et al., Gastroenterology 2021 |
-| **Child-Pugh** | Cirrhosis classification (Class A/B/C) — surgical risk | Pugh et al., Br J Surg 1973 |
+| Layer | Path | Role |
+|--------|------|------|
+| **Core library** | [`packages/clinical-scores`](packages/clinical-scores) | Pure TypeScript: `calculateMeld`, `calculateMeldNa`, `calculateMeld3`, `calculateChildPugh`, `checkLiverEnzymes`, `interpretFibroScan`, plus types, constants, and peer-reviewed citations. |
+| **iOS app** | [`apps/mobile`](apps/mobile) | Expo Router UI: four tools (MELD, Child-Pugh, FibroScan interpreter, liver enzyme checker), share sheets, references, and medical disclaimers. |
+| **Validation data** | [`validation/test-cases`](validation/test-cases) | CSV + Jest suites for regression testing and cross-checks. |
+| **Formulas & rules** | [`docs/FORMULAS.md`](docs/FORMULAS.md) | Documented equations, clamps, and interpretation thresholds. |
 
 ---
 
-## npm Package
+## Clinical tools (at a glance)
+
+1. **MELD family** — Original MELD, MELD-Na, and **MELD 3.0** (including albumin and sex per Kim et al., *Gastroenterology* 2021).
+2. **Child-Pugh** — Classic five-parameter score and class **A / B / C** for cirrhosis severity.
+3. **Liver enzyme checker** — ALT, AST, GGT, ALP, total bilirubin: normal vs elevated, **hepatocellular / cholestatic / mixed** pattern (R-ratio rules), AST/ALT commentary, plain-language recommendations.
+4. **FibroScan interpreter** — Liver stiffness (**kPa**) → fibrosis stage bands (**F0–F4**); optional CAP (**dB/m**) → steatosis grades (**S0–S3**) with cited cutoffs.
+
+Implementation details and references live in **FORMULAS.md** and in-code constants.
+
+---
+
+## Quick start
+
+### Clone
 
 ```bash
-npm install @livertracker/clinical-scores
+git clone https://github.com/priyamjyotsna/MELD-CHILD-PUGH.git
+cd MELD-CHILD-PUGH
 ```
+
+### npm package (library)
+
+```bash
+npm install
+cd packages/clinical-scores
+npm run build   # produces dist/
+npm test
+```
+
+Local consumers can depend on the workspace name `@livertracker/clinical-scores` (see root `package.json` workspaces).
 
 ```typescript
-import { calculateMeld, calculateMeldNa, calculateMeld3, calculateChildPugh } from '@livertracker/clinical-scores';
+import {
+  calculateMeld,
+  calculateMeldNa,
+  calculateMeld3,
+  calculateChildPugh,
+  checkLiverEnzymes,
+  interpretFibroScan,
+} from '@livertracker/clinical-scores';
 
-// MELD
-const meld = calculateMeld({ bilirubin: 3.5, creatinine: 1.8, inr: 1.5, onDialysis: false });
-console.log(meld.score);                          // 21
-console.log(meld.clinicalContext.severityLabel);  // "Severe"
-console.log(meld.references[0].doi);              // "10.1053/jhep.2001.22172"
-
-// MELD 3.0
-const meld3 = calculateMeld3({
-  bilirubin: 3.5, creatinine: 1.8, inr: 1.5, onDialysis: false,
-  sodium: 131, albumin: 2.8, sex: 'female'
+const meldNa = calculateMeldNa({
+  bilirubin: 2.0,
+  creatinine: 1.2,
+  inr: 1.4,
+  sodium: 132,
+  onDialysis: false,
 });
-console.log(meld3.score); // 27
 
-// Child-Pugh
-const cp = calculateChildPugh({
-  bilirubin: 2.5, albumin: 3.0, inr: 2.0,
-  ascites: 'mild', encephalopathy: 'grade_1_2'
-});
-console.log(cp.classification); // "C"
+const enzymes = checkLiverEnzymes({ alt: 120, ast: 90, alp: 200, ggt: 65, bilirubin: 1.0 });
+
+const fibro = interpretFibroScan({ liverStiffnessKpa: 10.2, capDbPerM: 280 });
 ```
 
----
-
-## iOS App
+### iOS app (Expo)
 
 ```bash
-git clone https://github.com/livertracker/clinical-scores
-cd livertracker-clinical-scores/apps/mobile
+cd apps/mobile
 npm install
 npx expo start --ios
 ```
 
+Production builds use [EAS Build](https://docs.expo.dev/build/introduction/) (`eas.json` in `apps/mobile`). App identifiers and EAS project slug are configured in `apps/mobile/app.json`.
+
 ---
 
-## REST API
+## Testing & validation
 
-```
-https://api.livertracker.com/v1
-```
+- **Unit tests:** `packages/clinical-scores/__tests__/*.test.ts` (Jest).
+- **Shared fixtures:** `validation/test-cases/*.csv` aligned with expected outputs.
+
+From repo root:
 
 ```bash
-curl -X POST https://api.livertracker.com/v1/calculate \
-  -H "Content-Type: application/json" \
-  -d '{"bilirubin": 3.5, "creatinine": 1.8, "inr": 1.5, "sodium": 131, "albumin": 2.8, "sex": "female", "onDialysis": false}'
-```
-
-See full documentation at [api.livertracker.com/docs](https://api.livertracker.com/docs).
-
----
-
-## Python Package
-
-```bash
-pip install livertracker
-```
-
-```python
-from livertracker import calculate_meld
-
-result = calculate_meld(bilirubin=3.5, creatinine=1.8, inr=1.5, on_dialysis=False)
-print(result.score)  # 21
+npm test
 ```
 
 ---
 
-## R Package
+## Ecosystem
 
-```r
-install.packages("livertracker")
-library(livertracker)
-
-result <- calculate_meld(bilirubin=3.5, creatinine=1.8, inr=1.5, on_dialysis=FALSE)
-result$score  # 21
-
-citation("livertracker")
-```
+This repo is the **reference implementation** for calculators also promoted under the **LiverTracker** umbrella ([livertracker.com](https://livertracker.com)). Related deliverables (public REST API, Python/R bindings, MCP server) may live in separate repos or releases as the ecosystem grows—this monorepo is the source of truth for the shared TypeScript engine and the **MELD family scores** mobile app.
 
 ---
 
-## Validation
+## How to cite
 
-All implementations are tested against [100 curated test cases](validation/test-cases/) covering:
-- Normal and boundary values
-- Clamping edge cases
-- Male/female pairs (MELD 3.0)
-- Dialysis patients
-- All Child-Pugh classification boundaries
+If you use this software in research, please cite it (update the DOI when Zenodo/GitHub release is minted):
 
-See [validation/README.md](validation/README.md) for methodology.
+**BibTeX:**
+
+```bibtex
+@software{meld_child_pugh_2026,
+  author    = {Priyam, Jyotsna},
+  title     = {MELD-CHILD-PUGH: Liver clinical scores and LiverTracker tools},
+  year      = {2026},
+  url       = {https://github.com/priyamjyotsna/MELD-CHILD-PUGH},
+  license   = {MIT}
+}
+```
+
+See also [CITATION.cff](CITATION.cff).
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). We welcome:
-- New scoring systems (FIB-4, APRI, Lille Score, Maddrey's DF, etc.)
-- Additional validation test cases
-- Translations/localizations
-- Bug reports and formula corrections
+See [CONTRIBUTING.md](CONTRIBUTING.md). Suggestions welcome for new scores, validation cases, localization, and documentation—especially formula citations and boundary-case tests.
 
 ---
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+**MIT** — see [LICENSE](LICENSE).
 
 ---
 
 ## Attribution
 
-Created by **Dr. Jyotsna Priyam** · [livertracker.com](https://livertracker.com)
+**Dr. Jyotsna Priyam** — [livertracker.com](https://livertracker.com) · [github.com/priyamjyotsna/MELD-CHILD-PUGH](https://github.com/priyamjyotsna/MELD-CHILD-PUGH)

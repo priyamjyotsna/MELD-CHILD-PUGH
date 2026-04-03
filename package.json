@@ -2,7 +2,15 @@
   "name": "livertracker-clinical-scores",
   "private": true,
   "version": "1.0.0",
-  "description": "LiverTracker monorepo — iOS app and clinical scoring npm package",
+  "description": "MELD family, Child-Pugh, liver enzymes, FibroScan tools — TypeScript library and Expo iOS app (MELD family scores)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/priyamjyotsna/MELD-CHILD-PUGH.git"
+  },
+  "homepage": "https://github.com/priyamjyotsna/MELD-CHILD-PUGH#readme",
+  "bugs": {
+    "url": "https://github.com/priyamjyotsna/MELD-CHILD-PUGH/issues"
+  },
   "workspaces": [
     "packages/*",
     "apps/*"

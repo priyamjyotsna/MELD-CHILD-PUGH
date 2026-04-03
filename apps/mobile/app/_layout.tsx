@@ -19,7 +19,7 @@ export default function RootLayout() {
           contentStyle: { backgroundColor: Colors.backgroundPage },
         }}
       >
-        <Stack.Screen name="index" options={{ title: 'LiverTracker Tools', headerShown: false }} />
+        <Stack.Screen name="index" options={{ title: 'MELD family scores', headerShown: false }} />
         <Stack.Screen
           name="(calculators)/liver-enzymes"
           options={{ title: 'Liver Enzyme Checker', headerBackTitle: 'Back' }}

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "MELD Child Pugh & Easy Liver Tools",
+    "name": "MELD family scores",
     "slug": "easy-liver-tools",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -29,8 +29,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": ""
-      }
+        "projectId": "d70a94f1-45c8-42fa-90c1-00a767b243f4"
+      },
+      "router": {}
     }
   }
 }
