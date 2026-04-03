@@ -1,39 +1,42 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
+message: >-
+  If you use this software or validation data in research, teaching, or
+  clinical-quality work, please cite the repository (see also GitHub’s
+  “Cite this repository” for APA/BibTeX from this file).
 type: software
-title: "LiverTracker Clinical Scores"
+title: "MELD-CHILD-PUGH: Liver clinical scores (MELD family, Child-Pugh, enzymes, FibroScan)"
 abstract: >-
-  An open-source, validated implementation of MELD, MELD-Na, MELD 3.0,
-  and Child-Pugh liver disease severity scoring systems. Available as an
-  iOS application, npm package, REST API, Python package, MCP server,
-  and R package.
+  Open-source TypeScript reference implementation of MELD, MELD-Na, MELD 3.0,
+  and Child-Pugh scoring; rule-based liver enzyme interpretation (injury pattern,
+  ratios); and FibroScan-style fibrosis/steatosis staging from kPa and CAP.
+  Distributed as the npm package @livertracker/clinical-scores and the
+  Expo/React Native iOS app “MELD family scores,” with documented formulas,
+  peer-review citations, and machine-readable validation fixtures.
 authors:
   - family-names: "Priyam"
     given-names: "Jyotsna"
-    orcid: "https://orcid.org/XXXX-XXXX-XXXX-XXXX"
 license: MIT
-repository-code: "https://github.com/livertracker/clinical-scores"
-url: "https://livertracker.com"
-doi: "10.5281/zenodo.XXXXXXX"
+repository-code: "https://github.com/priyamjyotsna/MELD-CHILD-PUGH"
+url: "https://github.com/priyamjyotsna/MELD-CHILD-PUGH"
 version: "1.0.0"
-date-released: "2026-XX-XX"
+date-released: "2026-04-01"
 keywords:
   - meld-score
+  - meld-na
+  - meld-3
   - child-pugh
   - liver-disease
   - hepatology
+  - liver-transplantation
   - clinical-calculator
-  - transplant
-  - meld-3
+  - liver-enzymes
+  - transient-elastography
+  - fibroscan
+  - fibrosis
+  - steatosis
+  - cap-score
   - open-source
+  - typescript
   - react-native
-  - medical
-preferred-citation:
-  type: article
-  authors:
-    - family-names: "Priyam"
-      given-names: "Jyotsna"
-  title: "LiverTracker MELD & Child-Pugh: An Open-Source, Validated Mobile Application for Liver Disease Severity Scoring"
-  journal: "JMIR mHealth and uHealth"
-  year: 2026
-  doi: "10.2196/XXXXX"
+  - expo
+  - medical-informatics

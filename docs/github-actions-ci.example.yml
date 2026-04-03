@@ -1,0 +1,34 @@
+# Copy to: .github/workflows/ci.yml
+# GitHub may require a Personal Access Token with the "workflow" scope to push
+# workflow files via HTTPS; you can also add this file in the GitHub web UI.
+#
+# cp docs/github-actions-ci.example.yml .github/workflows/ci.yml
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  clinical-scores:
+    name: Library build & tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build @livertracker/clinical-scores
+        run: npm run build -w @livertracker/clinical-scores
+
+      - name: Test @livertracker/clinical-scores
+        run: npm test -w @livertracker/clinical-scores

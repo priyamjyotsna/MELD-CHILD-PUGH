@@ -1,13 +1,13 @@
 # Validation Dataset
 
-This directory contains curated test cases for all four scoring systems implemented in LiverTracker.
+This directory contains curated test cases for clinical calculators and interpreters in [MELD-CHILD-PUGH](https://github.com/priyamjyotsna/MELD-CHILD-PUGH).
 
 ## Purpose
 
-1. **Automated testing** — All implementations (TypeScript, Python, R) must pass 100% of these cases
-2. **Cross-validation** — Cases verified against published formulas and reference implementations
-3. **Reproducibility** — Published as supplementary data with the journal paper
-4. **Community contribution** — Clinicians can submit additional anonymized test cases
+1. **Automated testing** — The TypeScript implementation in `packages/clinical-scores` is exercised by Jest against these fixtures; other language ports should match the same expected outputs.
+2. **Cross-validation** — Cases are checked against published formulas and documented interpretation rules.
+3. **Reproducibility** — Suitable to bundle as supplementary material with publications (with appropriate ethics de-identification).
+4. **Community contribution** — Clinicians can submit additional anonymized test cases.
 
 ## Files
 
@@ -17,6 +17,8 @@ This directory contains curated test cases for all four scoring systems implemen
 | `meld-na-cases.csv` | 25 | MELD-Na formula |
 | `meld3-cases.csv` | 25 | MELD 3.0 formula (Kim 2021) |
 | `child-pugh-cases.csv` | 20 | Child-Pugh scoring |
+| `liver-enzyme-cases.csv` | 25 | Liver enzyme checker (status + pattern rules) |
+| `fibroscan-cases.csv` | 20 | FibroScan interpreter (kPa / CAP bands) |
 
 ## Methodology
 

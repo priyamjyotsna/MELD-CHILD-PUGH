@@ -1,6 +1,6 @@
-# Contributing to LiverTracker Clinical Scores
+# Contributing to MELD-CHILD-PUGH
 
-Thank you for your interest in contributing! This project welcomes contributions from clinicians, researchers, and developers.
+Thank you for your interest in contributing! This project ([github.com/priyamjyotsna/MELD-CHILD-PUGH](https://github.com/priyamjyotsna/MELD-CHILD-PUGH)) welcomes contributions from clinicians, researchers, and developers.
 
 ## Types of Contributions
 

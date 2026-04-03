@@ -1,5 +1,8 @@
 # MELD · Child-Pugh · Liver clinical tools
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![CFF citation](https://img.shields.io/badge/Citation-CITATION.cff-1a7f37)](CITATION.cff)
+
 **Repository:** [github.com/priyamjyotsna/MELD-CHILD-PUGH](https://github.com/priyamjyotsna/MELD-CHILD-PUGH)
 
 Open-source monorepo for **liver disease assessment**: validated calculators for transplant severity scoring (MELD family, Child-Pugh), rule-based **liver enzyme** interpretation (including injury pattern and De Ritis–style ratios), and **FibroScan**-style staging from liver stiffness and CAP (steatosis). The same logic ships in a TypeScript **npm package** and an **iOS** app built with **Expo** (store-facing name: **MELD family scores**).
@@ -16,6 +19,9 @@ Open-source monorepo for **liver disease assessment**: validated calculators for
 | **iOS app** | [`apps/mobile`](apps/mobile) | Expo Router UI: four tools (MELD, Child-Pugh, FibroScan interpreter, liver enzyme checker), share sheets, references, and medical disclaimers. |
 | **Validation data** | [`validation/test-cases`](validation/test-cases) | CSV + Jest suites for regression testing and cross-checks. |
 | **Formulas & rules** | [`docs/FORMULAS.md`](docs/FORMULAS.md) | Documented equations, clamps, and interpretation thresholds. |
+| **Citing & DOIs** | [`docs/CITATION.md`](docs/CITATION.md) | How to cite, use GitHub’s cite button, and archive on Zenodo for a persistent DOI. |
+| **CI (optional)** | [`docs/github-actions-ci.example.yml`](docs/github-actions-ci.example.yml) | Example GitHub Actions workflow for library build + tests (copy to `.github/workflows/ci.yml`). |
+| **Security** | [`SECURITY.md`](SECURITY.md) | How to report sensitive issues responsibly. |
 
 ---
 
@@ -104,9 +110,18 @@ This repo is the **reference implementation** for calculators also promoted unde
 
 ---
 
+## Discovery & reproducibility (for papers and grants)
+
+- **GitHub citation:** The repo root [`CITATION.cff`](CITATION.cff) powers GitHub’s **“Cite this repository”** sidebar entry (standard APA/BibTeX export).
+- **Version pinning:** In methods sections, record a **release tag** or **commit SHA** and the app **build** (see `apps/mobile/app.json` `version` / iOS `buildNumber`).
+- **Archival DOI:** When you publish, create a **GitHub Release** and connect the repo to **[Zenodo](https://zenodo.org)** so each release gets a citable DOI; then add that DOI to `CITATION.cff` (step-by-step in [`docs/CITATION.md`](docs/CITATION.md)).
+- **Clinical references:** Cite **original score papers** (DOIs in [`docs/FORMULAS.md`](docs/FORMULAS.md)) as well as this software.
+
+---
+
 ## How to cite
 
-If you use this software in research, please cite it (update the DOI when Zenodo/GitHub release is minted):
+If you use this software in research, please cite the repository. After you mint a Zenodo DOI, add it to `CITATION.cff` and mention it here:
 
 **BibTeX:**
 
@@ -120,9 +135,7 @@ If you use this software in research, please cite it (update the DOI when Zenodo
 }
 ```
 
-See also [CITATION.cff](CITATION.cff).
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+See also [CITATION.cff](CITATION.cff) and the full guide [docs/CITATION.md](docs/CITATION.md).
 
 ---
 

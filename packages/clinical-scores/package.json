@@ -1,7 +1,7 @@
 {
   "name": "@livertracker/clinical-scores",
   "version": "1.0.0",
-  "description": "Validated MELD, MELD-Na, MELD 3.0, and Child-Pugh liver disease severity scoring engine",
+  "description": "MELD, MELD-Na, MELD 3.0, Child-Pugh, liver enzyme checker, FibroScan interpreter — TypeScript clinical engine",
   "author": {
     "name": "Dr. Jyotsna Priyam",
     "url": "https://livertracker.com"
@@ -51,7 +51,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/livertracker/clinical-scores"
+    "url": "https://github.com/priyamjyotsna/MELD-CHILD-PUGH.git",
+    "directory": "packages/clinical-scores"
   },
-  "homepage": "https://livertracker.com"
+  "homepage": "https://github.com/priyamjyotsna/MELD-CHILD-PUGH#readme",
+  "bugs": {
+    "url": "https://github.com/priyamjyotsna/MELD-CHILD-PUGH/issues"
+  }
 }
