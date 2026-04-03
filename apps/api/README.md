@@ -16,7 +16,7 @@ Examples (after you attach a domain):
 Deploy from the **Git repository root** with **Root Directory** in Vercel **empty** (not `apps/api`).
 
 - [`vercel.json`](../vercel.json) — `npm ci` + build `clinical-scores` only (**no `outputDirectory`** so `/api` serverless routes are not suppressed).
-- [`api/[[...path]].ts`](../api/[[...path]].ts) — serverless entry → `src/app.ts`.
+- [`api/v1/[...route].ts`](../api/v1/[...route].ts) — serverless entry → `src/app.ts`.
 - [`public/index.html`](../public/index.html) — landing page at `/`.
 
 HTTP routes remain **`/api/v1/...`**.
