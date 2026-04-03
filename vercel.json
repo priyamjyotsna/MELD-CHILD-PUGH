@@ -1,9 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "cd ../.. && npm ci",
-  "buildCommand": "cd ../.. && npm run build -w @livertracker/clinical-scores",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build -w @livertracker/clinical-scores",
   "framework": null,
-  "outputDirectory": "public",
+  "outputDirectory": "apps/api/public",
   "headers": [
     {
       "source": "/api/(.*)",

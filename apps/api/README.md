@@ -11,18 +11,22 @@ Examples (after you attach a domain):
 - `https://meldapi.livertracker.com/api/v1/health`
 - `https://<project>.vercel.app/api/v1/health`
 
-## Vercel note (output directory)
+## Vercel note (monorepo root)
 
-This project is **serverless API** + an empty **`public/`** folder so Vercel’s static output step succeeds. Your routes are still served from **`api/`** (`/api/v1/...`). If the dashboard overrides `outputDirectory`, set it to **`public`**.
+The live deployment uses the **repository root** as the Vercel project root (leave **Root Directory** in the Vercel dashboard **empty**). That avoids dashboard errors like “`apps/api` does not exist.”
+
+- Repo-root [`vercel.json`](../vercel.json) — `installCommand`, `buildCommand`, `outputDirectory: apps/api/public`
+- Repo-root [`api/[[...path]].ts`](../api/[[...path]].ts) — Vercel serverless entry (imports this package’s `src/app.ts`)
+
+Your HTTP routes are still **`/api/v1/...`** (Hono `basePath`), not the filesystem folder name.
 
 ## Deploy on Vercel (monorepo)
 
-1. In Vercel, **Import** the [MELD-CHILD-PUGH](https://github.com/priyamjyotsna/MELD-CHILD-PUGH) repo.
-2. Set **Root Directory** to **`apps/api`** (or deploy from repo root and point configuration at this folder—see Vercel monorepo docs).
-3. **Install command:** `cd ../.. && npm ci`  
-   **Build command:** `cd ../.. && npm run build -w @livertracker/clinical-scores`  
-   (Already mirrored in `vercel.json`.)
-4. **Add domain:** `meldapi.livertracker.com` → CNAME to Vercel (DNS at your registrar).
+1. **Import** [MELD-CHILD-PUGH](https://github.com/priyamjyotsna/MELD-CHILD-PUGH).
+2. **Root Directory:** leave **blank** (`.` / repository root). **Do not** set `apps/api`.
+3. **Production branch:** `main`.  
+   Install/build are taken from root `vercel.json` (`npm ci` + build `clinical-scores`).
+4. **Add domain:** e.g. `meldapi.livertracker.com` → CNAME per Vercel.
 
 Use the Vercel-assigned URL first to verify, then attach the custom subdomain.
 

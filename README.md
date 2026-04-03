@@ -90,7 +90,7 @@ const meldNa = calculateMeldNa({
 
 const enzymes = checkLiverEnzymes({ alt: 120, ast: 90, alp: 200, ggt: 65, bilirubin: 1.0 });
 
-const fibro = interpretFibroScan({ liverStiffnessKpa: 10.2, capDbPerM: 280 });
+const fibro = interpretFibroScan({ liverStiffness: 10.2, capScore: 280 });
 ```
 
 ### iOS app (Expo)
@@ -113,7 +113,7 @@ npm run dev
 ```
 
 - Defaults to `http://127.0.0.1:8787/api/v1/health`
-- Deploy: set Vercel **root directory** to `apps/api`, use install/build commands from [`apps/api/vercel.json`](apps/api/vercel.json), then attach **`meldapi.livertracker.com`** (or use the provided `*.vercel.app` host).
+- **Deploy:** connect the **whole repo** to Vercel and leave **Root Directory empty** (repository root). Config lives in [`vercel.json`](vercel.json); serverless entry is [`api/[[...path]].ts`](api/[[...path]].ts). Then attach **`meldapi.livertracker.com`** if you want.
 
 Details: [`apps/api/README.md`](apps/api/README.md).
 
