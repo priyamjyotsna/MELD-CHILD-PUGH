@@ -189,6 +189,8 @@ app.get('/', (c) =>
   c.json({
     service: 'LiverTracker clinical scores API',
     docs: `${GITHUB_REPOSITORY_URL}/tree/main/apps/api`,
+    /** On Vercel, static `public/index.html` is served at `/` in the browser; this is the same host. */
+    browserDocs: '/',
     basePath: '/api/v1',
     health: '/api/v1/health',
   }),

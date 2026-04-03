@@ -3,44 +3,411 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>LiverTracker clinical scores API</title>
+    <meta
+      name="description"
+      content="LiverTracker clinical scores REST API — MELD, MELD-Na, MELD 3.0, Child-Pugh, liver enzymes, FibroScan. Usage, curl examples, and citation."
+    />
+    <title>LiverTracker clinical scores API — documentation</title>
     <style>
+      :root {
+        --bg: #f8fafc;
+        --card: #fff;
+        --text: #0f172a;
+        --muted: #475569;
+        --link: #1d4ed8;
+        --border: #e2e8f0;
+        --code-bg: #f1f5f9;
+      }
+      * {
+        box-sizing: border-box;
+      }
       body {
-        font-family: system-ui, sans-serif;
-        max-width: 40rem;
-        margin: 2rem auto;
-        padding: 0 1rem;
-        line-height: 1.5;
-        color: #0f172a;
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        margin: 0;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.6;
+      }
+      header {
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        padding: 1.25rem 1.5rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 650;
+      }
+      header p {
+        margin: 0.35rem 0 0;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+      nav {
+        margin-top: 0.75rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+      nav a {
+        color: var(--link);
+      }
+      main {
+        max-width: 44rem;
+        margin: 0 auto;
+        padding: 1.75rem 1.25rem 3rem;
+      }
+      section {
+        margin-bottom: 2.25rem;
+      }
+      h2 {
+        font-size: 1.1rem;
+        margin: 0 0 0.75rem;
+        padding-bottom: 0.35rem;
+        border-bottom: 2px solid var(--border);
+      }
+      h3 {
+        font-size: 1rem;
+        margin: 1.25rem 0 0.5rem;
+      }
+      p,
+      li {
+        color: var(--text);
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 0.95rem;
       }
       a {
-        color: #1d4ed8;
+        color: var(--link);
+      }
+      code,
+      pre {
+        font-family: ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
+        font-size: 0.82rem;
       }
       code {
-        background: #f1f5f9;
-        padding: 0.15rem 0.35rem;
+        background: var(--code-bg);
+        padding: 0.12rem 0.35rem;
         border-radius: 4px;
-        font-size: 0.95em;
+      }
+      pre {
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 1rem 1.1rem;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 0.75rem 0;
+        line-height: 1.45;
+      }
+      pre code {
+        background: none;
+        padding: 0;
+        color: inherit;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        background: var(--card);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 0.55rem 0.75rem;
+        border-bottom: 1px solid var(--border);
+      }
+      th {
+        background: var(--code-bg);
+        font-weight: 600;
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      .callout {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem 1.1rem;
+        margin: 1rem 0;
+      }
+      .callout strong {
+        display: block;
+        margin-bottom: 0.35rem;
+      }
+      footer {
+        max-width: 44rem;
+        margin: 0 auto;
+        padding: 0 1.25rem 2.5rem;
+        font-size: 0.9rem;
+        color: var(--muted);
       }
     </style>
   </head>
   <body>
-    <h1>LiverTracker clinical scores API</h1>
-    <p>
-      This is the API host. Use JSON endpoints under
-      <code>/api/v1/</code>.
-    </p>
-    <p>
-      <strong>Health check:</strong>
-      <a href="/api/v1/health">/api/v1/health</a>
-    </p>
-    <p>
-      <strong>Catalog:</strong>
-      <a href="/api/v1/scoring-systems">/api/v1/scoring-systems</a>
-    </p>
-    <p>
-      <strong>Source:</strong>
-      <a href="https://github.com/priyamjyotsna/MELD-CHILD-PUGH">MELD-CHILD-PUGH</a>
-    </p>
+    <header>
+      <h1>LiverTracker clinical scores API</h1>
+      <p>
+        REST JSON API for MELD, MELD-Na, MELD 3.0, Child-Pugh, liver enzyme checks, and FibroScan
+        interpretation — same engine as the open-source monorepo.
+      </p>
+      <nav aria-label="On this page">
+        <a href="#base-url">Base URL</a>
+        <a href="#endpoints">Endpoints</a>
+        <a href="#examples">curl examples</a>
+        <a href="#responses">Responses</a>
+        <a href="#citing">How to cite</a>
+        <a href="https://github.com/priyamjyotsna/MELD-CHILD-PUGH">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="base-url">
+        <h2>Base URL</h2>
+        <p>
+          All versioned routes are under <code>/api/v1</code>. On this deployment, the origin you
+          are viewing is the API host (static docs + serverless routes).
+        </p>
+        <p class="muted">
+          Replace <code>$BASE</code> in the examples below with your host, for example this site’s
+          origin, or a custom domain you attach in Vercel.
+        </p>
+        <pre><code>export BASE="https://meld-child-pugh.vercel.app"   # example; use your production URL</code></pre>
+      </section>
+
+      <section id="endpoints">
+        <h2>Endpoints</h2>
+        <p class="muted">Send <code>Content-Type: application/json</code> on POST bodies.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Path</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GET</td>
+              <td><code>/api/v1/health</code></td>
+              <td>Liveness; includes engine + citation metadata in JSON</td>
+            </tr>
+            <tr>
+              <td>GET</td>
+              <td><code>/api/v1/scoring-systems</code></td>
+              <td>Catalog / metadata for client apps</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td><code>/api/v1/calculate</code></td>
+              <td>Run all applicable tools from one JSON object (optional fields)</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td><code>/api/v1/meld</code></td>
+              <td>MELD only</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td><code>/api/v1/meld-na</code></td>
+              <td>MELD-Na</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td><code>/api/v1/meld3</code></td>
+              <td>MELD 3.0</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td><code>/api/v1/child-pugh</code></td>
+              <td>Child-Pugh</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td><code>/api/v1/liver-enzymes</code></td>
+              <td>Liver enzyme checker (at least one analyte)</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td><code>/api/v1/fibroscan</code></td>
+              <td>Liver stiffness (kPa); optional CAP (dB/m)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="callout">
+          <strong>Disclaimer</strong>
+          Educational and clinical decision support only. Not a substitute for professional judgment
+          or institutional protocols. CORS is open for developer convenience; add your own policies
+          if you expose sensitive workloads.
+        </div>
+      </section>
+
+      <section id="examples">
+        <h2>curl examples</h2>
+        <p class="muted">Paste into a terminal after setting <code>BASE</code>.</p>
+
+        <h3>Health check</h3>
+        <pre><code>curl -sS "$BASE/api/v1/health" | jq .</code></pre>
+
+        <h3>Scoring systems catalog</h3>
+        <pre><code>curl -sS "$BASE/api/v1/scoring-systems" | jq .</code></pre>
+
+        <h3>MELD</h3>
+        <pre><code>curl -sS -X POST "$BASE/api/v1/meld" \
+  -H "Content-Type: application/json" \
+  -d '{"bilirubin":2.0,"creatinine":1.2,"inr":1.4,"onDialysis":false}' | jq .</code></pre>
+
+        <h3>MELD-Na</h3>
+        <pre><code>curl -sS -X POST "$BASE/api/v1/meld-na" \
+  -H "Content-Type: application/json" \
+  -d '{"bilirubin":2.0,"creatinine":1.2,"inr":1.4,"sodium":132,"onDialysis":false}' | jq .</code></pre>
+
+        <h3>MELD 3.0</h3>
+        <pre><code>curl -sS -X POST "$BASE/api/v1/meld3" \
+  -H "Content-Type: application/json" \
+  -d '{"bilirubin":2.0,"creatinine":1.2,"inr":1.4,"sodium":132,"albumin":3.2,"sex":"female","onDialysis":false}' | jq .</code></pre>
+
+        <h3>Child-Pugh</h3>
+        <p class="muted">
+          <code>ascites</code>: <code>none</code> | <code>mild</code> |
+          <code>moderate_severe</code> — <code>encephalopathy</code>: <code>none</code> |
+          <code>grade_1_2</code> | <code>grade_3_4</code>
+        </p>
+        <pre><code>curl -sS -X POST "$BASE/api/v1/child-pugh" \
+  -H "Content-Type: application/json" \
+  -d '{"bilirubin":2.0,"albumin":3.0,"inr":1.5,"ascites":"mild","encephalopathy":"none"}' | jq .</code></pre>
+
+        <h3>Liver enzymes</h3>
+        <p class="muted">At least one of <code>alt</code>, <code>ast</code>, <code>ggt</code>, <code>alp</code>, <code>bilirubin</code>.</p>
+        <pre><code>curl -sS -X POST "$BASE/api/v1/liver-enzymes" \
+  -H "Content-Type: application/json" \
+  -d '{"alt":120,"ast":90,"alp":200,"ggt":65,"bilirubin":1.0}' | jq .</code></pre>
+
+        <h3>FibroScan interpreter</h3>
+        <pre><code>curl -sS -X POST "$BASE/api/v1/fibroscan" \
+  -H "Content-Type: application/json" \
+  -d '{"liverStiffness":10.2,"capScore":280}' | jq .</code></pre>
+
+        <h3>Universal <code>/calculate</code></h3>
+        <p class="muted">
+          One payload: the server runs every tool for which required inputs are present (may return
+          <code>null</code> for tools that lack data).
+        </p>
+        <pre><code>curl -sS -X POST "$BASE/api/v1/calculate" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "bilirubin": 2.0,
+    "creatinine": 1.2,
+    "inr": 1.4,
+    "sodium": 132,
+    "albumin": 3.2,
+    "sex": "female",
+    "onDialysis": false,
+    "ascites": "none",
+    "encephalopathy": "none",
+    "alt": 85,
+    "liverStiffness": 8.5
+  }' | jq .</code></pre>
+      </section>
+
+      <section id="responses">
+        <h2>Response shape</h2>
+        <p>
+          Successful responses are JSON objects that include a <code>meta</code> object
+          (<code>apiVersion</code>, <code>calculationEngine</code>, timestamp,
+          <code>disclaimer</code>, and <code>citation</code> with repository URL and OSF tool
+          registrations). Tool results live in addition to <code>meta</code> (e.g.
+          <code>result</code>, or multiple keys for <code>/calculate</code>).
+        </p>
+        <p>Errors return HTTP 4xx/5xx with <code>meta</code> and an <code>error</code> object:</p>
+        <pre><code>{
+  "meta": { ... },
+  "error": {
+    "code": "INVALID_INPUT",
+    "message": "Request body must be JSON"
+  }
+}</code></pre>
+      </section>
+
+      <section id="citing">
+        <h2>How to cite</h2>
+        <p>
+          Cite the <strong>software / API host</strong>, the <strong>GitHub repository</strong>, and
+          — when your work concerns a specific tool — the matching
+          <strong>Open Science Framework (OSF)</strong> registration DOI. Full guidance:
+          <a href="https://github.com/priyamjyotsna/MELD-CHILD-PUGH/blob/main/docs/CITATION.md"
+            >docs/CITATION.md</a
+          >.
+        </p>
+        <h3>OSF registrations (per tool)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Tool</th>
+              <th>DOI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MELD family (MELD, MELD-Na, MELD 3.0)</td>
+              <td>
+                <a href="https://doi.org/10.17605/OSF.IO/WAM6K">10.17605/OSF.IO/WAM6K</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Child-Pugh</td>
+              <td>
+                <a href="https://doi.org/10.17605/OSF.IO/XJWA8">10.17605/OSF.IO/XJWA8</a>
+              </td>
+            </tr>
+            <tr>
+              <td>FibroScan interpreter</td>
+              <td>
+                <a href="https://doi.org/10.17605/OSF.IO/CSBWN">10.17605/OSF.IO/CSBWN</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Liver enzyme checker</td>
+              <td>
+                <a href="https://doi.org/10.17605/OSF.IO/3XEWC">10.17605/OSF.IO/3XEWC</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>GitHub “Cite this repository”</h3>
+        <p>
+          The repo ships <code>CITATION.cff</code> for GitHub’s citation export (APA, BibTeX, etc.):
+          <a href="https://github.com/priyamjyotsna/MELD-CHILD-PUGH">github.com/priyamjyotsna/MELD-CHILD-PUGH</a>.
+        </p>
+        <h3>Example BibTeX (monorepo)</h3>
+        <pre><code>@software{meld_child_pugh_2026,
+  author    = {Priyam, Jyotsna},
+  title     = {MELD-CHILD-PUGH: Liver clinical scores and LiverTracker tools},
+  year      = {2026},
+  url       = {https://github.com/priyamjyotsna/MELD-CHILD-PUGH},
+  license   = {MIT}
+}</code></pre>
+        <p class="muted">
+          When you use this HTTP API in methods, record the API base URL, deployment date or commit,
+          and pin the <code>calculationEngine</code> string from
+          <code>/api/v1/health</code> if you need reproducibility.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Source:
+        <a href="https://github.com/priyamjyotsna/MELD-CHILD-PUGH">MELD-CHILD-PUGH</a>
+        · MIT License · LiverTracker
+      </p>
+    </footer>
   </body>
 </html>

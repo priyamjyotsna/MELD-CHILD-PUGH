@@ -115,7 +115,28 @@ npm run dev
 - Defaults to `http://127.0.0.1:8787/api/v1/health`
 - **Deploy:** connect the **whole repo** to Vercel and leave **Root Directory empty** (repository root). Config lives in [`vercel.json`](vercel.json); serverless entry is [`api/v1/[...route].ts`](api/v1/[...route].ts); static landing page in [`public/`](public/). Do not set a custom **Output Directory** in the dashboard (it can break `/api` functions). Add **`meldapi.livertracker.com`** when ready.
 
-Details: [`apps/api/README.md`](apps/api/README.md).
+**Human-readable API docs** (endpoints, curl examples, citations) ship with the deployment: open the project URL at `/` (e.g. [meld-child-pugh.vercel.app](https://meld-child-pugh.vercel.app)). Full developer copy: [`apps/api/README.md`](apps/api/README.md).
+
+#### Calling the API from the terminal
+
+Set `BASE` to your deployed origin (or `http://127.0.0.1:8787` when running `npm run dev` in `apps/api`).
+
+```bash
+export BASE="https://meld-child-pugh.vercel.app"
+
+curl -sS "$BASE/api/v1/health"
+curl -sS "$BASE/api/v1/scoring-systems"
+
+curl -sS -X POST "$BASE/api/v1/meld-na" \
+  -H "Content-Type: application/json" \
+  -d '{"bilirubin":2,"creatinine":1.2,"inr":1.4,"sodium":132,"onDialysis":false}'
+
+curl -sS -X POST "$BASE/api/v1/calculate" \
+  -H "Content-Type: application/json" \
+  -d '{"bilirubin":2,"creatinine":1.2,"inr":1.4,"sodium":132,"albumin":3.2,"sex":"female","ascites":"none","encephalopathy":"none","liverStiffness":9.1}'
+```
+
+Successful JSON responses include a `meta` block (version, engine package, disclaimer, **citation** links). For papers, combine: this repository ([`CITATION.cff`](CITATION.cff) / GitHub “Cite this repository”), the relevant **OSF DOI** per tool ([table in OSF section above](#osf-registrations-per-tool)), and clinical references in [`docs/FORMULAS.md`](docs/FORMULAS.md). See [`docs/CITATION.md`](docs/CITATION.md).
 
 ---
 

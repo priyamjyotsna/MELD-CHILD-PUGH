@@ -64,6 +64,66 @@ npm run dev
 
 Every successful JSON body includes a `meta` object (`apiVersion`, `calculationEngine`, `citation`, `disclaimer`).
 
+## Usage examples (`curl`)
+
+Use `BASE` = production API origin (e.g. `https://meld-child-pugh.vercel.app` or your custom domain) or `http://127.0.0.1:8787` locally. Optional: pipe to `jq` for readability.
+
+```bash
+export BASE="https://meld-child-pugh.vercel.app"
+
+# Liveness + citation metadata
+curl -sS "$BASE/api/v1/health"
+
+# Client catalog
+curl -sS "$BASE/api/v1/scoring-systems"
+
+# MELD
+curl -sS -X POST "$BASE/api/v1/meld" \
+  -H "Content-Type: application/json" \
+  -d '{"bilirubin":2.0,"creatinine":1.2,"inr":1.4,"onDialysis":false}'
+
+# MELD-Na
+curl -sS -X POST "$BASE/api/v1/meld-na" \
+  -H "Content-Type: application/json" \
+  -d '{"bilirubin":2.0,"creatinine":1.2,"inr":1.4,"sodium":132,"onDialysis":false}'
+
+# MELD 3.0 (sex: "male" | "female")
+curl -sS -X POST "$BASE/api/v1/meld3" \
+  -H "Content-Type: application/json" \
+  -d '{"bilirubin":2.0,"creatinine":1.2,"inr":1.4,"sodium":132,"albumin":3.2,"sex":"female","onDialysis":false}'
+
+# Child-Pugh — ascites: none | mild | moderate_severe; encephalopathy: none | grade_1_2 | grade_3_4
+curl -sS -X POST "$BASE/api/v1/child-pugh" \
+  -H "Content-Type: application/json" \
+  -d '{"bilirubin":2.0,"albumin":3.0,"inr":1.5,"ascites":"mild","encephalopathy":"none"}'
+
+# Liver enzymes — at least one of alt, ast, ggt, alp, bilirubin
+curl -sS -X POST "$BASE/api/v1/liver-enzymes" \
+  -H "Content-Type: application/json" \
+  -d '{"alt":120,"ast":90,"alp":200,"ggt":65,"bilirubin":1.0}'
+
+# FibroScan — liverStiffness (kPa) required; capScore (dB/m) optional
+curl -sS -X POST "$BASE/api/v1/fibroscan" \
+  -H "Content-Type: application/json" \
+  -d '{"liverStiffness":10.2,"capScore":280}'
+
+# Universal calculator — fills in every tool possible from one JSON body
+curl -sS -X POST "$BASE/api/v1/calculate" \
+  -H "Content-Type: application/json" \
+  -d '{"bilirubin":2,"creatinine":1.2,"inr":1.4,"sodium":132,"albumin":3.2,"sex":"female","onDialysis":false,"ascites":"none","encephalopathy":"none","alt":85,"liverStiffness":8.5}'
+```
+
+### Errors
+
+On 4xx/5xx, responses include `meta` and `error`: `{ "code", "message" }` (e.g. `INVALID_INPUT`, `MISSING_REQUIRED_FIELD`).
+
+## How to cite the API and software
+
+- **Live API:** In methods, state the base URL you used, approximate access date, and (if needed) the `calculationEngine` value from `/api/v1/health` for reproducibility.
+- **Repository:** Use GitHub’s **Cite this repository** ([`CITATION.cff`](../../CITATION.cff) at monorepo root).
+- **Per-tool OSF DOIs:** MELD family [10.17605/OSF.IO/WAM6K](https://doi.org/10.17605/OSF.IO/WAM6K), Child-Pugh [10.17605/OSF.IO/XJWA8](https://doi.org/10.17605/OSF.IO/XJWA8), FibroScan [10.17605/OSF.IO/CSBWN](https://doi.org/10.17605/OSF.IO/CSBWN), liver enzymes [10.17605/OSF.IO/3XEWC](https://doi.org/10.17605/OSF.IO/3XEWC).
+- **Detail:** [`docs/CITATION.md`](../../docs/CITATION.md).
+
 ## Rate limiting
 
 Not enforced in this revision (serverless has no shared counter). For production, add [Vercel KV](https://vercel.com/docs/storage/vercel-kv), Upstash, or an API gateway.
