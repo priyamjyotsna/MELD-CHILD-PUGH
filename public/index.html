@@ -252,6 +252,17 @@
       <section id="examples">
         <h2>curl examples</h2>
         <p class="muted">Paste into a terminal after setting <code>BASE</code>.</p>
+        <div class="callout">
+          <strong>Shell line continuation</strong>
+          Put <code>\</code> at the <em>end</em> of the line with no characters after it (a trailing
+          space after <code>\</code> breaks the continuation, so <code>curl</code> may omit
+          <code>-H</code> / <code>-d</code>).
+        </div>
+        <div class="callout">
+          <strong>If <code>jq</code> fails with a parse error</strong>
+          The body may not be JSON — for example a Vercel error or timeout page. Run the same command
+          without <code>| jq .</code> to inspect the raw response.
+        </div>
 
         <h3>Health check</h3>
         <pre><code>curl -sS "$BASE/api/v1/health" | jq .</code></pre>

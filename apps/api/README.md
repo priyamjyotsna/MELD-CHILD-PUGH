@@ -124,6 +124,11 @@ On 4xx/5xx, responses include `meta` and `error`: `{ "code", "message" }` (e.g. 
 - **Per-tool OSF DOIs:** MELD family [10.17605/OSF.IO/WAM6K](https://doi.org/10.17605/OSF.IO/WAM6K), Child-Pugh [10.17605/OSF.IO/XJWA8](https://doi.org/10.17605/OSF.IO/XJWA8), FibroScan [10.17605/OSF.IO/CSBWN](https://doi.org/10.17605/OSF.IO/CSBWN), liver enzymes [10.17605/OSF.IO/3XEWC](https://doi.org/10.17605/OSF.IO/3XEWC).
 - **Detail:** [`docs/CITATION.md`](../../docs/CITATION.md).
 
+## Troubleshooting
+
+- **`jq: parse error`** — The response is not JSON (often a Vercel plain-text error or **504** timeout page). Run `curl` without `| jq .`. In shells, ensure `\` at the end of a continued line has **no space after it**, or put the whole `curl` on one line.
+- **POST hangs / 504 while GET works** — The serverless entry buffers the Node request body and calls `app.fetch` (see `src/node-serverless-bridge.ts`). Streaming POST bodies through older `@hono/node-server/vercel` adapters can hang on Vercel ([upstream issue](https://github.com/honojs/node-server/issues/306)).
+
 ## Rate limiting
 
 Not enforced in this revision (serverless has no shared counter). For production, add [Vercel KV](https://vercel.com/docs/storage/vercel-kv), Upstash, or an API gateway.
