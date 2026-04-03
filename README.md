@@ -17,6 +17,7 @@ Open-source monorepo for **liver disease assessment**: validated calculators for
 |--------|------|------|
 | **Core library** | [`packages/clinical-scores`](packages/clinical-scores) | Pure TypeScript: `calculateMeld`, `calculateMeldNa`, `calculateMeld3`, `calculateChildPugh`, `checkLiverEnzymes`, `interpretFibroScan`, plus types, constants, and peer-reviewed citations. |
 | **iOS app** | [`apps/mobile`](apps/mobile) | Expo Router UI: four tools (MELD, Child-Pugh, FibroScan interpreter, liver enzyme checker), share sheets, references, and medical disclaimers. |
+| **HTTP API** | [`apps/api`](apps/api) | Hono + Vercel serverless: `/api/v1/*` calculators (deploy to **meldapi.livertracker.com** or `*.vercel.app`). |
 | **Validation data** | [`validation/test-cases`](validation/test-cases) | CSV + Jest suites for regression testing and cross-checks. |
 | **Formulas & rules** | [`docs/FORMULAS.md`](docs/FORMULAS.md) | Documented equations, clamps, and interpretation thresholds. |
 | **Citing & DOIs** | [`docs/CITATION.md`](docs/CITATION.md) | How to cite, use GitHub’s cite button, and archive on Zenodo for a persistent DOI. |
@@ -101,6 +102,20 @@ npx expo start --ios
 ```
 
 Production builds use [EAS Build](https://docs.expo.dev/build/introduction/) (`eas.json` in `apps/mobile`). App identifiers and EAS project slug are configured in `apps/mobile/app.json`.
+
+### HTTP API (Vercel)
+
+```bash
+npm ci
+npm run build -w @livertracker/clinical-scores
+cd apps/api
+npm run dev
+```
+
+- Defaults to `http://127.0.0.1:8787/api/v1/health`
+- Deploy: set Vercel **root directory** to `apps/api`, use install/build commands from [`apps/api/vercel.json`](apps/api/vercel.json), then attach **`meldapi.livertracker.com`** (or use the provided `*.vercel.app` host).
+
+Details: [`apps/api/README.md`](apps/api/README.md).
 
 ---
 

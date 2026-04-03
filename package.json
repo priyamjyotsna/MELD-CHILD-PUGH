@@ -18,7 +18,8 @@
   "scripts": {
     "test": "npm run test --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
-    "build": "npm run build --workspaces --if-present"
+    "build": "npm run build --workspaces --if-present",
+    "dev:api": "npm run dev -w livertracker-api"
   },
   "license": "MIT",
   "author": {

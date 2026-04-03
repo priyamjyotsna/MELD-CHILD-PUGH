@@ -1,0 +1,21 @@
+{
+  "name": "livertracker-api",
+  "private": true,
+  "version": "1.0.0",
+  "description": "LiverTracker clinical scores HTTP API (Vercel) — MELD family, Child-Pugh, enzymes, FibroScan",
+  "scripts": {
+    "dev": "tsx watch src/dev-server.ts",
+    "build": "tsc --noEmit",
+    "vercel-build": "cd ../.. && npm run build -w @livertracker/clinical-scores"
+  },
+  "dependencies": {
+    "@livertracker/clinical-scores": "*",
+    "hono": "^4.6.16"
+  },
+  "devDependencies": {
+    "@hono/node-server": "^1.13.7",
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "~5.6.3"
+  }
+}
