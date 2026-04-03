@@ -1,5 +1,4 @@
 import { Hono } from 'hono';
-import { cors } from 'hono/cors';
 import {
   calculateChildPugh,
   calculateMeld,
@@ -176,7 +175,13 @@ v1.post('/fibroscan', async (c) => {
 
 export const app = new Hono();
 
-app.use('*', cors());
+/** No `hono/cors` here — Vercel Node passes a request shape that breaks `headers.get`; CORS is set in `vercel.json`. */
+app.use('*', async (c, next) => {
+  if (c.req.method === 'OPTIONS') {
+    return new Response(null, { status: 204 });
+  }
+  await next();
+});
 
 app.route('/api/v1', v1);
 

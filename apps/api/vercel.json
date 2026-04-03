@@ -13,6 +13,10 @@
           "value": "GET, POST, OPTIONS"
         },
         {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        },
+        {
           "key": "X-LiverTracker-Disclaimer",
           "value": "Educational use only; not for regulatory clinical decisions without local validation."
         }
