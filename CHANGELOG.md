@@ -36,4 +36,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Contributors
 
-- Dr. Jyotsna Priyam — Clinical lead, hepatologist, creator
+- Dr. Jyotsna Priyam — Clinical lead, researcher, creator

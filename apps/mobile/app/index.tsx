@@ -262,7 +262,7 @@ export default function HomeScreen() {
             iconBg={Colors.brandNavy}
             title="About & References"
             subtitle="Formulas, citations, and methodology"
-            tags={['Open Source', 'MIT']}
+            tags={['OSF · GitHub', 'Citations']}
             onPress={() => router.push('/about')}
             delay={550}
           />

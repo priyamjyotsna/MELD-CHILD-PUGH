@@ -70,7 +70,7 @@ This progression should be reflected in the Home screen ordering and the About s
 
 ### Key Stakeholders
 
-- **Dr. Jyotsna Priyam** — Clinical lead, hepatologist, creator of the tool. Must be credited in-app, in the API responses, in package metadata, and in all academic outputs.
+- **Dr. Jyotsna Priyam** — Clinical lead, researcher, creator of the tool. Must be credited in-app, in the API responses, in package metadata, and in all academic outputs.
 - **LiverTracker** (livertracker.com) — Parent brand. The app is a standalone tool within the LiverTracker ecosystem.
 
 ### Core Principles

@@ -62,7 +62,7 @@ Use **3–10** screenshots per localization; the first 1–3 matter most for con
 | **4** | **Child-Pugh** — input or result | Class **A / B / C** visible on result. |
 | **5** | **FibroScan** — result | Stiffness **kPa** + **F0–F4** / optional **CAP** / **S0–S3**. |
 | **6** | **Liver enzymes** — result | Traffic-light style + pattern (hepatocellular / cholestatic / mixed) if visible. |
-| **7** | **About & references** | Citations / credibility (“Open source”, DOIs) — builds trust for clinicians. |
+| **7** | **About & references** | Citations / credibility (OSF DOIs, free tool + engine on GitHub) — builds trust for clinicians. |
 | **8** (optional) | **Disclaimer** (short scroll top) | Shows seriousness and compliance-minded design — use only if it reads well visually. |
 
 **Demo inputs** (fictional, for consistent screenshots):
@@ -112,7 +112,7 @@ TOOLS
 • Liver enzyme checker — ALT, AST, GGT, ALP, and bilirubin with pattern cues and plain-language context.
 
 TRANSPARENCY
-Formulas and literature references are documented in-app. The clinical engine is open source (MIT) on GitHub for reproducibility.
+Formulas and literature references are documented in-app. The clinical calculation engine is open source (MIT) on GitHub for reproducibility. LiverTracker.com is the full-featured LiverTracker platform (web and mobile)—this free app is a companion calculator bundle, not the whole platform.
 
 IMPORTANT
 This app is for education and clinical decision support only. It does not replace professional judgment, institutional protocols, or direct patient care decisions. Not a medical device.

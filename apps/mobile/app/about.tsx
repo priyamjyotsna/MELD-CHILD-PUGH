@@ -9,7 +9,12 @@ import {
   Linking,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { OSF_LIVERTRACKER_TOOL_REGISTRATIONS, GITHUB_REPOSITORY_URL } from '@livertracker/clinical-scores';
+import {
+  OSF_LIVERTRACKER_TOOL_REGISTRATIONS,
+  GITHUB_REPOSITORY_URL,
+} from '@livertracker/clinical-scores';
+
+const GOOGLE_SCHOLAR_URL = 'https://scholar.google.com/citations?user=kpizk-8AAAAJ';
 import { Colors } from '../constants/colors';
 import { Typography } from '../constants/typography';
 import { Shadow, Spacing } from '../constants/spacing';
@@ -128,9 +133,11 @@ export default function AboutScreen() {
         <View style={styles.card}>
           <Text style={styles.cardTitle}>About LiverTracker</Text>
           <Text style={styles.body}>
-            LiverTracker is an open-source platform for liver disease severity scoring, developed
-            to support clinicians, researchers, and patients in understanding liver disease
-            progression and transplant eligibility.
+            LiverTracker (livertracker.com) is a full web and mobile platform for liver health.
+            This app is a <Text style={styles.bold}>free</Text> tool that bundles MELD (including
+            MELD-Na and MELD 3.0), Child-Pugh, FibroScan interpretation, and liver enzyme checks—so
+            you can use trusted formulas in one place. It is a companion to the broader LiverTracker
+            product line, not the whole platform.
           </Text>
           <TouchableOpacity onPress={() => openUrl('https://livertracker.com')}>
             <Text style={styles.link}>livertracker.com →</Text>
@@ -236,14 +243,18 @@ export default function AboutScreen() {
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Credits & Attribution</Text>
           <Text style={styles.body}>
-            Developed by <Text style={styles.bold}>Dr. Jyotsna Priyam</Text>, Hepatologist.
+            Developed by <Text style={styles.bold}>Dr. Jyotsna Priyam</Text>, Researcher.
           </Text>
           <Text style={styles.body}>
-            This tool is open-source (MIT license) and available on GitHub. If you use this
-            software in your research, please cite it.
+            The clinical scoring engine used in these calculators is open source (MIT) on GitHub.
+            LiverTracker.com is the full-featured LiverTracker web and mobile platform—not
+            open source as a whole. If you use the published engine in research, please cite it.
           </Text>
           <TouchableOpacity onPress={() => openUrl(GITHUB_REPOSITORY_URL)}>
             <Text style={styles.link}>View on GitHub →</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => openUrl(GOOGLE_SCHOLAR_URL)}>
+            <Text style={styles.link}>Google Scholar profile →</Text>
           </TouchableOpacity>
         </View>
 
