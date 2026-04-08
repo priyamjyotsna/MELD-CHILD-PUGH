@@ -2,7 +2,7 @@
   "expo": {
     "name": "MELD family scores",
     "slug": "easy-liver-tools",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "livertracker",
@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.livertracker.easy-liver-tools",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "infoPlist": {
         "NSPrivacyAccessedAPITypes": [],
         "ITSAppUsesNonExemptEncryption": false
